@@ -36,7 +36,6 @@
   .btn-danger{color:var(--red)}
   .btn-danger:hover{background:var(--red-bg);border-color:transparent}
   .btn-sm{padding:5px 10px;font-size:12px}
-  .btn-full{width:100%}
   .btn-icon{padding:6px;width:30px;height:30px}
   .sidebar-section{padding:16px 20px;border-bottom:1px solid var(--border)}
   .section-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
@@ -86,39 +85,34 @@
   ::-webkit-scrollbar{width:6px;height:6px}
   ::-webkit-scrollbar-track{background:transparent}
   ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-  /* Modal */
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
   .modal-overlay.open{display:flex}
   .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);width:100%;max-width:960px;max-height:92vh;overflow-y:auto;display:flex;flex-direction:column}
   .modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1}
   .modal-title{font-size:16px;font-weight:600;letter-spacing:-.02em}
   .modal-id{font-size:12px;color:var(--text3);font-family:var(--mono);margin-top:2px}
-  .modal-tabs{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:61px;z-index:1;flex-wrap:wrap}
-  .tab-btn{padding:12px 20px;font-size:13px;font-weight:600;color:var(--text3);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;font-family:var(--sans);letter-spacing:.02em}
+  .modal-tabs{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:61px;z-index:1}
+  .tab-btn{padding:12px 20px;font-size:13px;font-weight:600;color:var(--text3);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;font-family:var(--sans)}
   .tab-btn:hover{color:var(--text2)}
   .tab-btn.active{color:var(--accent2);border-bottom-color:var(--accent)}
   .tab-panel{display:none;padding:24px}
   .tab-panel.active{display:block}
-  /* FOTO */
   .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
   .photo-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
   .photo-card img{width:100%;max-height:300px;object-fit:contain;background:#0a0a0d;display:block;cursor:zoom-in}
   .photo-label{padding:10px 14px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;justify-content:space-between}
   .photo-label a{color:var(--accent2);font-size:11px;text-decoration:none}
-  /* Lightbox */
   .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:500;align-items:center;justify-content:center;cursor:zoom-out}
   .lightbox.open{display:flex}
   .lightbox img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:var(--radius)}
-  /* XML */
   .xml-section{margin-bottom:28px}
   .xml-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
   .xml-label{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
   pre.xml-code{background:#0d0d10;border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-family:var(--mono);font-size:12px;line-height:1.7;overflow-x:auto;white-space:pre;color:var(--text2);max-height:420px;overflow-y:auto}
   .xml-tag{color:#7c6bff}.xml-attr{color:#a99bff}.xml-val{color:#4ade80}.xml-comment{color:#5a5a72;font-style:italic}
-  /* CAMPI */
   .highlight-section{margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}
   .highlight-section-title{font-size:11px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
-  .highlight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:4px}
+  .highlight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
   .highlight-item{background:var(--accent-dim);border:1px solid rgba(124,107,255,0.2);border-radius:var(--radius);padding:10px 14px}
   .highlight-key{font-size:10px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
   .highlight-val{font-size:14px;color:var(--text);font-weight:500;word-break:break-word}
@@ -178,7 +172,6 @@
       </div>
     </div>
   </aside>
-
   <main class="main">
     <div class="main-header">
       <div class="search-wrap">
@@ -200,7 +193,6 @@
   </main>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="overlayClick(event)">
   <div class="modal">
     <div class="modal-header">
@@ -223,7 +215,6 @@ let CFG = {
   projectName:"Archivio", projectEmoji:"🗄️", projectSub:"Database",
   highlightFields:[], fotoFields:[], xmlFields:[], hideFromTable:[]
 };
-
 let columns=[], currentPage=1, totalRows=0, sortedCol='', sortDir='asc', debTimer=null, allData=[];
 
 async function apiFetch(params={}){
@@ -233,7 +224,6 @@ async function apiFetch(params={}){
   if(!r.ok){const t=await r.text();throw new Error(`${r.status}: ${t.slice(0,200)}`);}
   return r.json();
 }
-
 function norm(data){
   const list=data.list||data.records||[];
   const total=data.pageInfo?.totalRows??data.pageInfo?.totalRecords??list.length;
@@ -263,10 +253,8 @@ async function init(){
   }
 }
 
-// ── Filters ────────────────────────────────────────────
 let fc=0;
 const OPS=[['eq','= uguale'],['neq','≠ diverso'],['like','∋ contiene'],['nlike','∌ non contiene'],['gt','> maggiore'],['lt','< minore'],['gte','≥'],['lte','≤'],['empty','∅ vuoto'],['notempty','≠∅ non vuoto']];
-
 function addFilter(){
   const id=++fc,list=document.getElementById('filter-list');
   if(list.children.length>0){const l=document.createElement('div');l.className='filter-logic';l.textContent='AND';l.id='logic-'+id;list.appendChild(l);}
@@ -291,7 +279,6 @@ function buildWhere(){
   });
   return p.join('~and');
 }
-
 function debounceSearch(){clearTimeout(debTimer);debTimer=setTimeout(()=>runSearch(1),350);}
 
 async function runSearch(page=1){
@@ -318,8 +305,9 @@ function renderResults(rows,total){
   const ps=parseInt(document.getElementById('page-size').value);
   const pages=Math.ceil(total/ps);
   if(!rows.length){area.innerHTML=`<div class="empty-state"><div class="icon">🔍</div><p>Nessun risultato</p></div>`;return;}
-  const hidden=new Set(CFG.hideFromTable);
-  const cols=(columns.length?columns:Object.keys(rows[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!hidden.has(k));
+  // Nascondi dalla tabella: campi tecnici + foto + xml
+  const hiddenInTable=new Set([...CFG.hideFromTable,...CFG.fotoFields,...CFG.xmlFields]);
+  const cols=(columns.length?columns:Object.keys(rows[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!hiddenInTable.has(k));
   const thead=`<thead><tr>${cols.map(c=>`<th onclick="sortBy('${c}')" class="${sortedCol===c?'sorted':''}">${c}${sortedCol===c?(sortDir==='asc'?' ↑':' ↓'):''}</th>`).join('')}</tr></thead>`;
   const tbody='<tbody>'+rows.map((row,i)=>{
     const cells=cols.map(col=>{
@@ -364,25 +352,47 @@ function sortBy(col){
 
 function exportCSV(){
   if(!allData.length){alert('Nessun dato.');return;}
-  const hidden=new Set(CFG.hideFromTable);
-  const cols=(columns.length?columns:Object.keys(allData[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!hidden.has(k));
+  const hiddenInTable=new Set([...CFG.hideFromTable,...CFG.fotoFields,...CFG.xmlFields]);
+  const cols=(columns.length?columns:Object.keys(allData[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!hiddenInTable.has(k));
   const csv=[cols.join(','),...allData.map(r=>cols.map(c=>`"${String(r[c]??'').replace(/"/g,'""')}"`).join(','))].join('\n');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));
   a.download='export.csv';a.click();
 }
 
+// ── Helpers attachment ─────────────────────────────────
+function parseAtt(val){
+  if(!val) return [];
+  // Già array (NocoDB v3 restituisce direttamente array)
+  if(Array.isArray(val)) return val;
+  // Stringa JSON
+  if(typeof val==='string'){
+    try{ return JSON.parse(val); }catch{ return []; }
+  }
+  return [];
+}
+function resolveUrl(a){
+  if(!a) return '';
+  if(typeof a==='string') return a;
+  // Preferisce signedUrl (temporaneo ma funzionante), poi url, poi path
+  return a.signedUrl || a.url || (a.path ? (a.path.startsWith('http') ? a.path : 'https://app.nocodb.com/'+a.path) : '');
+}
+
 // ── Modal ──────────────────────────────────────────────
 function openDetail(i){
-  const row=allData[i];if(!row)return;
-  const hidden=new Set(CFG.hideFromTable);
-  const firstVisible=columns.find(k=>!hidden.has(k))||columns[0]||'';
+  const row=allData[i]; if(!row) return;
+  const fotoSet=new Set(CFG.fotoFields);
+  const xmlSet=new Set(CFG.xmlFields);
+  const highlightSet=new Set(CFG.highlightFields);
+  // Campi da escludere totalmente dalla tab Campi
+  const excludeFromCampi=new Set([...fotoSet,...xmlSet,'Id','id','ncRecordId','CreatedAt','UpdatedAt']);
+
+  const firstVisible=columns.find(k=>!fotoSet.has(k)&&!xmlSet.has(k))||columns[0]||'';
   const id=row['IDENTIFICATORE']||row[firstVisible]||row['Id']||'';
   const titleField=CFG.highlightFields[0]||firstVisible;
   document.getElementById('modal-title').textContent=row[titleField]||id;
   document.getElementById('modal-id').textContent=id?`ID: ${id}`:'';
 
-  // Tre tab fisse: FOTO / MODS·PREMIS / CAMPI
   document.getElementById('modal-tabs').innerHTML=`
     <button class="tab-btn active" onclick="switchTab('foto')">📷 Foto</button>
     <button class="tab-btn" onclick="switchTab('xml')">📄 MODS / PREMIS</button>
@@ -390,68 +400,53 @@ function openDetail(i){
   `;
 
   // ── Tab FOTO ──
-  const fotoCards = CFG.fotoFields.map(field=>{
+  const fotoCards=CFG.fotoFields.map(field=>{
     const att=parseAtt(row[field]);
-    if(!att.length)return'';
-    const u=resolveUrl(att[0]);
-    const label=field.replace(/_/g,' ');
-    return`<div class="photo-card">
-      <img src="${u}" alt="${label}" loading="lazy" onclick="openLightbox('${u}')" onerror="this.parentElement.style.display='none'">
-      <div class="photo-label">${label}<a href="${u}" download target="_blank">↓ scarica</a></div>
-    </div>`;
-  }).filter(Boolean).join('');
-  document.getElementById('tab-foto').innerHTML = fotoCards
-    ? `<div class="photo-grid">${fotoCards}</div>`
-    : `<div class="no-media"><div class="icon">📷</div><p>Nessuna foto caricata per questo elemento</p></div>`;
-
-  // ── Tab XML (MODS / PREMIS) ──
-  const xmlHTML = CFG.xmlFields.map(field=>{
-    const content=row[field]||'';
-    if(!content)return'';
-    return buildXmlSection(field.replace(/_/g,' '),content);
-  }).filter(Boolean).join('');
-  document.getElementById('tab-xml').innerHTML = xmlHTML
-    || `<div class="no-media"><div class="icon">📄</div><p>Nessun file XML caricato per questo elemento</p></div>`;
-
-  // ── Tab CAMPI ──
-  // Sezione highlight (campi in evidenza)
-  const highlightSet = new Set(CFG.highlightFields);
-  const excludeFromAll = new Set([...CFG.hideFromTable,'Id','id','ncRecordId']);
-
-  let campiHTML = '';
-
-  if(CFG.highlightFields.length){
-    const hItems = CFG.highlightFields
-      .filter(f=>row[f]!==undefined&&row[f]!==null&&row[f]!=='')
-      .map(f=>`<div class="highlight-item">
-        <div class="highlight-key">${f}</div>
-        <div class="highlight-val">${row[f]}</div>
-      </div>`).join('');
-    if(hItems){
-      campiHTML += `<div class="highlight-section">
-        <div class="highlight-section-title">⭐ Campi principali</div>
-        <div class="highlight-grid">${hItems}</div>
-      </div>`;
-    }
-  }
-
-  // Tutti gli altri campi (esclusi highlight, foto, xml, tecnici)
-  const otherItems = Object.entries(row)
-    .filter(([k])=>!excludeFromAll.has(k)&&!k.startsWith('nc_')&&!highlightSet.has(k))
-    .map(([k,v])=>{
-      const d=(v===null||v===undefined||v==='')?'':typeof v==='object'?JSON.stringify(v):String(v);
-      return`<div class="field-item">
-        <div class="field-key">${k}</div>
-        <div class="field-val ${!d?'empty':''}">${d||'—'}</div>
+    if(!att.length) return '';
+    return att.map(item=>{
+      const u=resolveUrl(item);
+      if(!u) return '';
+      const label=field.replace(/_/g,' ');
+      return `<div class="photo-card">
+        <img src="${u}" alt="${label}" loading="lazy" onclick="openLightbox('${u.replace(/'/g,"\\'")}')">
+        <div class="photo-label">${label}<a href="${u}" target="_blank" rel="noopener">↓ scarica</a></div>
       </div>`;
     }).join('');
+  }).filter(Boolean).join('');
+  document.getElementById('tab-foto').innerHTML=fotoCards
+    ?`<div class="photo-grid">${fotoCards}</div>`
+    :`<div class="no-media"><div class="icon">📷</div><p>Nessuna foto caricata per questo elemento</p></div>`;
 
-  if(otherItems){
-    campiHTML += `<div class="fields-section-title">Tutti i campi</div>
-      <div class="fields-grid">${otherItems}</div>`;
+  // ── Tab XML ──
+  const xmlHTML=CFG.xmlFields.map(field=>{
+    const content=row[field];
+    if(!content||typeof content!=='string'||!content.trim()) return '';
+    return buildXmlSection(field.replace(/_/g,' '),content);
+  }).filter(Boolean).join('');
+  document.getElementById('tab-xml').innerHTML=xmlHTML
+    ||`<div class="no-media"><div class="icon">📄</div><p>Nessun file XML caricato per questo elemento</p></div>`;
+
+  // ── Tab CAMPI ──
+  let campiHTML='';
+  if(CFG.highlightFields.length){
+    const hItems=CFG.highlightFields
+      .filter(f=>!excludeFromCampi.has(f)&&row[f]!==null&&row[f]!==undefined&&row[f]!=='')
+      .map(f=>`<div class="highlight-item"><div class="highlight-key">${f}</div><div class="highlight-val">${row[f]}</div></div>`)
+      .join('');
+    if(hItems) campiHTML+=`<div class="highlight-section"><div class="highlight-section-title">⭐ Campi principali</div><div class="highlight-grid">${hItems}</div></div>`;
   }
-
-  document.getElementById('tab-campi').innerHTML = campiHTML || `<div class="no-media"><div class="icon">📋</div><p>Nessun campo disponibile</p></div>`;
+  const otherItems=Object.entries(row)
+    .filter(([k])=>!excludeFromCampi.has(k)&&!highlightSet.has(k)&&!k.startsWith('nc_'))
+    .map(([k,v])=>{
+      let d='';
+      if(v===null||v===undefined||v==='') d='';
+      else if(Array.isArray(v)) d=`[${v.length} allegati]`;
+      else if(typeof v==='object') d=JSON.stringify(v);
+      else d=String(v);
+      return`<div class="field-item"><div class="field-key">${k}</div><div class="field-val ${!d?'empty':''}">${d||'—'}</div></div>`;
+    }).join('');
+  if(otherItems) campiHTML+=`<div class="fields-section-title" style="margin-top:${campiHTML?'0':'4px'}">Tutti i campi</div><div class="fields-grid">${otherItems}</div>`;
+  document.getElementById('tab-campi').innerHTML=campiHTML||`<div class="no-media"><div class="icon">📋</div><p>Nessun campo disponibile</p></div>`;
 
   switchTab('foto');
   document.getElementById('modal-overlay').classList.add('open');
@@ -460,15 +455,8 @@ function openDetail(i){
 function buildXmlSection(label,xml){
   const h=hxml(xml.trim());
   const dl=URL.createObjectURL(new Blob([xml],{type:'application/xml'}));
-  return`<div class="xml-section">
-    <div class="xml-toolbar">
-      <span class="xml-label">${label}</span>
-      <a href="${dl}" download="${label.toLowerCase().replace(/ /g,'_')}.xml" class="btn btn-sm">↓ Scarica XML</a>
-    </div>
-    <pre class="xml-code">${h}</pre>
-  </div>`;
+  return`<div class="xml-section"><div class="xml-toolbar"><span class="xml-label">${label}</span><a href="${dl}" download="${label.toLowerCase().replace(/ /g,'_')}.xml" class="btn btn-sm">↓ Scarica XML</a></div><pre class="xml-code">${h}</pre></div>`;
 }
-
 function hxml(x){
   return x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/(&lt;\?[^?]*\?&gt;)/g,'<span class="xml-comment">$1</span>')
@@ -476,10 +464,6 @@ function hxml(x){
     .replace(/(&lt;\/?)([\w:.-]+)/g,'<span class="xml-tag">$1$2</span>')
     .replace(/([\w:.-]+)=(&quot;)(.*?)(\2)/g,'<span class="xml-attr">$1</span>=<span class="xml-val">&quot;$3&quot;</span>');
 }
-
-function parseAtt(val){if(!val)return[];if(typeof val==='string'){try{val=JSON.parse(val);}catch{return[];}}return Array.isArray(val)?val:[];}
-function resolveUrl(a){if(!a)return'';if(a.signedUrl)return a.signedUrl;if(a.url)return a.url;if(a.path)return a.path.startsWith('http')?a.path:`https://app.nocodb.com/${a.path}`;return'';}
-
 function switchTab(n){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.onclick.toString().includes(`'${n}'`)));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
