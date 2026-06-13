@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd" version="3.7" ID="VGM-SWI-MK8D-001">
+  <titleInfo>
+    <title>Mario Kart 8 Deluxe</title>
+  </titleInfo>
+  <name type="corporate">
+    <namePart>Nintendo EAD</namePart>
+    <role>
+      <roleTerm type="text" authority="marcrelator">developer</roleTerm>
+    </role>
+  </name>
+  <name type="corporate">
+    <namePart>Nintendo</namePart>
+    <role>
+      <roleTerm type="text" authority="marcrelator">publisher</roleTerm>
+    </role>
+  </name>
+  <typeOfResource>software, multimedia</typeOfResource>
+  <genre authority="local">video game</genre>
+  <originInfo>
+    <publisher>Nintendo</publisher>
+    <dateIssued encoding="iso8601">2017</dateIssued>
+  </originInfo>
+  <language>
+    <languageTerm type="code" authority="iso639-2b">ita</languageTerm>
+  </language>
+  <physicalDescription>
+    <form authority="local">Cartuccia Nintendo Switch</form>
+    <note type="condition">Usato</note>
+  </physicalDescription>
+  <identifier type="local">VGM-SWI-MK8D-001</identifier>
+  <location>
+    <physicalLocation>Collezione Privata Alessandro Mantoan</physicalLocation>
+    <holdingSimple>
+      <copyInformation>
+        <subLocation>Desio</subLocation>
+      </copyInformation>
+    </holdingSimple>
+  </location>
+  <note type="console">Nintendo Switch</note>
+  <note type="genere">Racing</note>
+  <recordInfo>
+    <recordCreationDate encoding="iso8601">2026-06-13</recordCreationDate>
+    <recordOrigin>Generato automaticamente da genera_mods.py — Collezione Privata Alessandro Mantoan</recordOrigin>
+  </recordInfo>
+</mods>

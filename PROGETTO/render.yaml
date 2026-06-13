@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: archivio
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: NOCODB_URL
+        value: https://app.nocodb.com
+      - key: NOCODB_TOKEN
+        sync: false
+      - key: NOCODB_TABLE_ID
+        sync: false
+      - key: NOCODB_BASE_ID
+        sync: false

@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='utf-8'?>
+<premis xmlns="http://www.loc.gov/premis/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/premis/v3 https://www.loc.gov/standards/premis/premis.xsd" version="3.0">
+  <object xsi:type="premis:file">
+    <objectIdentifier>
+      <objectIdentifierType>local</objectIdentifierType>
+      <objectIdentifierValue>VGM-PS4-WTDG-001</objectIdentifierValue>
+    </objectIdentifier>
+    <objectCategory>Video game</objectCategory>
+    <significantProperties>
+      <significantPropertiesType>Titolo</significantPropertiesType>
+      <significantPropertiesValue>Watch Dogs</significantPropertiesValue>
+    </significantProperties>
+    <significantProperties>
+      <significantPropertiesType>Console</significantPropertiesType>
+      <significantPropertiesValue>Playstation 4</significantPropertiesValue>
+    </significantProperties>
+    <significantProperties>
+      <significantPropertiesType>Genere</significantPropertiesType>
+      <significantPropertiesValue>Action, Avventura</significantPropertiesValue>
+    </significantProperties>
+    <significantProperties>
+      <significantPropertiesType>Developer</significantPropertiesType>
+      <significantPropertiesValue>Ubisoft Montreal</significantPropertiesValue>
+    </significantProperties>
+    <significantProperties>
+      <significantPropertiesType>Producer</significantPropertiesType>
+      <significantPropertiesValue>Ubisoft</significantPropertiesValue>
+    </significantProperties>
+    <significantProperties>
+      <significantPropertiesType>Condizione</significantPropertiesType>
+      <significantPropertiesValue>Usato</significantPropertiesValue>
+    </significantProperties>
+    <significantProperties>
+      <significantPropertiesType>Supporto</significantPropertiesType>
+      <significantPropertiesValue>Blu-Ray Disc</significantPropertiesValue>
+    </significantProperties>
+    <objectCharacteristics>
+      <compositionLevel>0</compositionLevel>
+      <format>
+        <formatDesignation>
+          <formatName>Video game</formatName>
+          <formatVersion>N/A</formatVersion>
+        </formatDesignation>
+      </format>
+    </objectCharacteristics>
+    <originalName>Collezione Privata Alessandro Mantoan</originalName>
+    <storage>
+      <contentLocation>
+        <contentLocationType>physical</contentLocationType>
+        <contentLocationValue>Alessandro Mantoan</contentLocationValue>
+      </contentLocation>
+    </storage>
+  </object>
+  <event>
+    <eventIdentifier>
+      <eventIdentifierType>local</eventIdentifierType>
+      <eventIdentifierValue>VGM-PS4-WTDG-001-EVT-001</eventIdentifierValue>
+    </eventIdentifier>
+    <eventType>acquisition</eventType>
+    <eventDateTime>2014</eventDateTime>
+    <eventDetailInformation>
+      <eventDetail>Acquisizione dell'oggetto nella collezione</eventDetail>
+    </eventDetailInformation>
+    <eventOutcomeInformation>
+      <eventOutcome>success</eventOutcome>
+      <eventOutcomeDetail>
+        <eventOutcomeDetailNote>Oggetto acquisito e registrato con ID VGM-PS4-WTDG-001</eventOutcomeDetailNote>
+      </eventOutcomeDetail>
+    </eventOutcomeInformation>
+    <linkingAgentIdentifier>
+      <linkingAgentIdentifierType>local</linkingAgentIdentifierType>
+      <linkingAgentIdentifierValue>Alessandro Mantoan-01</linkingAgentIdentifierValue>
+    </linkingAgentIdentifier>
+  </event>
+  <event>
+    <eventIdentifier>
+      <eventIdentifierType>local</eventIdentifierType>
+      <eventIdentifierValue>VGM-PS4-WTDG-001-EVT-002</eventIdentifierValue>
+    </eventIdentifier>
+    <eventType>description</eventType>
+    <eventDateTime>2026-06-13</eventDateTime>
+    <eventDetailInformation>
+      <eventDetail>Catalogazione e generazione metadati PREMIS</eventDetail>
+    </eventDetailInformation>
+    <eventOutcomeInformation>
+      <eventOutcome>success</eventOutcome>
+      <eventOutcomeDetail>
+        <eventOutcomeDetailNote>Metadati MODS e PREMIS generati automaticamente</eventOutcomeDetailNote>
+      </eventOutcomeDetail>
+    </eventOutcomeInformation>
+    <linkingAgentIdentifier>
+      <linkingAgentIdentifierType>local</linkingAgentIdentifierType>
+      <linkingAgentIdentifierValue>Alessandro Mantoan-01</linkingAgentIdentifierValue>
+    </linkingAgentIdentifier>
+  </event>
+  <event>
+    <eventIdentifier>
+      <eventIdentifierType>local</eventIdentifierType>
+      <eventIdentifierValue>VGM-PS4-WTDG-001-EVT-003</eventIdentifierValue>
+    </eventIdentifier>
+    <eventType>capture</eventType>
+    <eventDateTime>2026-06-13</eventDateTime>
+    <eventDetailInformation>
+      <eventDetail>Documentazione fotografica fronte/retro</eventDetail>
+    </eventDetailInformation>
+    <eventOutcomeInformation>
+      <eventOutcome>success</eventOutcome>
+      <eventOutcomeDetail>
+        <eventOutcomeDetailNote>Acquisizione digitale immagini dell'oggetto</eventOutcomeDetailNote>
+      </eventOutcomeDetail>
+    </eventOutcomeInformation>
+    <linkingAgentIdentifier>
+      <linkingAgentIdentifierType>local</linkingAgentIdentifierType>
+      <linkingAgentIdentifierValue>Alessandro Mantoan-01</linkingAgentIdentifierValue>
+    </linkingAgentIdentifier>
+  </event>
+  <agent>
+    <agentIdentifier>
+      <agentIdentifierType>local</agentIdentifierType>
+      <agentIdentifierValue>Alessandro Mantoan-01</agentIdentifierValue>
+    </agentIdentifier>
+    <agentName>Alessandro Mantoan</agentName>
+    <agentType>organization</agentType>
+  </agent>
+  <rights>
+    <rightsStatement>
+      <rightsStatementIdentifier>
+        <rightsStatementIdentifierType>local</rightsStatementIdentifierType>
+        <rightsStatementIdentifierValue>VGM-PS4-WTDG-001-RGT-001</rightsStatementIdentifierValue>
+      </rightsStatementIdentifier>
+      <rightsBasis>other</rightsBasis>
+      <otherRightsInformation>
+        <otherRightsNotes>Oggetto di proprietà privata. Alessandro Mantoan. Tutti i diritti riservati. Uso consentito solo per documentazione interna.</otherRightsNotes>
+      </otherRightsInformation>
+    </rightsStatement>
+  </rights>
+</premis>
