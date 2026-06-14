@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Archivio</title>
+<title>Archivio Videogames</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#0f0f11;--surface:#18181c;--surface2:#222228;--border:#2e2e38;--border2:#3d3d4a;--accent:#7c6bff;--accent2:#a99bff;--accent-dim:rgba(124,107,255,0.12);--text:#e8e8f0;--text2:#9090a8;--text3:#5a5a72;--green:#4ade80;--green-bg:rgba(74,222,128,0.1);--red:#f87171;--red-bg:rgba(248,113,113,0.1);--radius:10px;--radius-lg:14px;--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif}
@@ -132,10 +132,10 @@
   <aside class="sidebar">
     <div class="sidebar-header">
       <div class="logo">
-        <div class="logo-icon" id="logo-icon">🗄️</div>
+        <div class="logo-icon" id="logo-icon">🎮</div>
         <div>
-          <div class="logo-text" id="logo-text">Archivio</div>
-          <div class="logo-sub" id="logo-sub">Database</div>
+          <div class="logo-text" id="logo-text">Archivio Videogames</div>
+          <div class="logo-sub" id="logo-sub">Database Videogames</div>
         </div>
       </div>
       <div class="status-row">
@@ -197,15 +197,31 @@
 <!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="overlayClick(event)">
   <div class="modal">
+
+    <!-- HEADER -->
     <div class="modal-header">
-      <div><div class="modal-title" id="modal-title">Dettaglio</div><div class="modal-id" id="modal-id"></div></div>
-      <button class="btn btn-ghost btn-icon" onclick="closeModal()" style="font-size:18px;line-height:1">✕</button>
+      <div>
+        <div class="modal-title" id="modal-title">Dettaglio</div>
+        <div class="modal-id" id="modal-id"></div>
+      </div>
+
+      <button class="btn btn-ghost btn-icon" onclick="closeModal()">✕</button>
     </div>
-    <div class="modal-tabs" id="modal-tabs"></div>
-    <div id="tab-highlight" class="tab-panel"></div>
-    <div id="tab-foto"      class="tab-panel"></div>
-    <div id="tab-xml"       class="tab-panel"></div>
-    <div id="tab-campi"     class="tab-panel"></div>
+
+    <!-- TAB BUTTONS -->
+    <div class="modal-tabs">
+      <button class="tab-btn active" onclick="setActiveTab('highlight')">Highlight</button>
+      <button class="tab-btn" onclick="setActiveTab('foto')">Foto</button>
+      <button class="tab-btn" onclick="setActiveTab('xml')">XML</button>
+      <button class="tab-btn" onclick="setActiveTab('campi')">Campi</button>
+    </div>
+
+    <!-- PANELS -->
+    <div id="tab-highlight" class="tab-panel active"></div>
+    <div id="tab-foto" class="tab-panel"></div>
+    <div id="tab-xml" class="tab-panel"></div>
+    <div id="tab-campi" class="tab-panel"></div>
+
   </div>
 </div>
 
