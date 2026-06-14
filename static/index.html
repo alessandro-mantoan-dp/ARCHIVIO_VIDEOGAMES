@@ -229,7 +229,7 @@
 <script>
 // ── Config da backend ──────────────────────────────────
 let CFG = {
-  projectName:"Archivio Videogames", projectEmoji:"🎮", projectSub:"Database Videogames",
+  projectName:"Archivio", projectEmoji:"🗄️", projectSub:"Database",
   highlightFields:[], fotoFields:[], xmlFields:[], hideFromTable:[],
   columnOrder:["IDENTIFICATORE", "SOFTWARE", "TITOLO", "GENERE", "SVILUPPATORE", "PRODUTTORE", "ANNO", "SUPPORTO", "CONDIZIONI", "PROVENIENZA"]   // ← nuovo: array ordinato di colonne dal backend
 };
@@ -255,12 +255,26 @@ function norm(data){
 function deriveColumns(firstRecord){
   const raw=Object.keys(firstRecord).filter(k=>!k.startsWith('nc_')&&k!=='Id'&&k!=='id');
   if(CFG.columnOrder&&CFG.columnOrder.length){
-    // Mette prima le colonne dichiarate nell'ordine voluto, poi eventuali extra
     const ordered=CFG.columnOrder.filter(c=>raw.includes(c));
     const extra=raw.filter(c=>!CFG.columnOrder.includes(c));
     return [...ordered,...extra];
   }
   return raw;
+}
+
+// Auto-rileva fotoFields / xmlFields / hideFromTable dalle colonne se il backend non li fornisce.
+// Convenzione: colonne che iniziano con FOTO_ → foto; XML_ → xml.
+// Le colonne foto e xml vengono anche aggiunte a hideFromTable (non mostrate nella tabella principale).
+function autoDetectFieldTypes(cols){
+  if(!CFG.fotoFields||!CFG.fotoFields.length){
+    CFG.fotoFields = cols.filter(c=>c.toUpperCase().startsWith('FOTO_'));
+  }
+  if(!CFG.xmlFields||!CFG.xmlFields.length){
+    CFG.xmlFields = cols.filter(c=>c.toUpperCase().startsWith('XML_'));
+  }
+  // Nasconde dalla tabella principale le colonne foto e xml (troppo ingombranti)
+  const autoHide=new Set([...CFG.fotoFields,...CFG.xmlFields]);
+  CFG.hideFromTable=[...new Set([...CFG.hideFromTable,...autoHide])];
 }
 
 async function init(){
@@ -277,7 +291,10 @@ async function init(){
   try{
     const data=await apiFetch({limit:1});
     const{list}=norm(data);
-    if(list.length>0) columns=deriveColumns(list[0]);
+    if(list.length>0){
+      columns=deriveColumns(list[0]);
+      autoDetectFieldTypes(columns);
+    }
     setStatus('ok','Connesso');
     populateSelects();
     addFilter();
@@ -333,7 +350,7 @@ async function runSearch(page=1){
     const data=await apiFetch(params);
     const{list,total}=norm(data);
     totalRows=total;allData=list;
-    if(allData.length>0&&columns.length===0){columns=deriveColumns(allData[0]);populateSelects();}
+    if(allData.length>0&&columns.length===0){columns=deriveColumns(allData[0]);autoDetectFieldTypes(columns);populateSelects();}
     renderResults(allData,total);
   }catch(e){showError(e.message);}
 }
