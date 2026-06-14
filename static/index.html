@@ -3,20 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Archivio Videogame</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Archivio</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:#0f0f11;--surface:#18181c;--surface2:#222228;
-    --border:#2e2e38;--border2:#3d3d4a;
-    --accent:#7c6bff;--accent2:#a99bff;--accent-dim:rgba(124,107,255,0.12);
-    --text:#e8e8f0;--text2:#9090a8;--text3:#5a5a72;
-    --green:#4ade80;--green-bg:rgba(74,222,128,0.1);
-    --red:#f87171;--red-bg:rgba(248,113,113,0.1);
-    --radius:10px;--radius-lg:14px;
-    --mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif;
-  }
+  :root{--bg:#0f0f11;--surface:#18181c;--surface2:#222228;--border:#2e2e38;--border2:#3d3d4a;--accent:#7c6bff;--accent2:#a99bff;--accent-dim:rgba(124,107,255,0.12);--text:#e8e8f0;--text2:#9090a8;--text3:#5a5a72;--green:#4ade80;--green-bg:rgba(74,222,128,0.1);--red:#f87171;--red-bg:rgba(248,113,113,0.1);--radius:10px;--radius-lg:14px;--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6}
   .app{display:flex;min-height:100vh}
@@ -26,19 +16,19 @@
   .logo{display:flex;align-items:center;gap:10px;margin-bottom:8px}
   .logo-icon{width:36px;height:36px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
   .logo-text{font-size:16px;font-weight:600;letter-spacing:-0.02em}
-  .logo-sub{font-size:11px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.05em}
+  .logo-sub{font-size:11px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em}
   .status-row{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--text3)}
   .status-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
   .status-dot.ok{background:var(--green);box-shadow:0 0 0 3px var(--green-bg)}
   .status-dot.err{background:var(--red)}
-  label{display:block;font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px}
+  label{display:block;font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
   input[type=text],select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--sans);font-size:13px;padding:9px 12px;outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none}
   input[type=text]:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
   select{background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%235a5a72' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
   .field{margin-bottom:14px}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
   .btn:hover{border-color:var(--border2);color:var(--text);background:#2a2a33}
-  .btn:active{transform:scale(0.98)}
+  .btn:active{transform:scale(.98)}
   .btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
   .btn-primary:hover{background:#6a59ee;border-color:#6a59ee;color:#fff}
   .btn-ghost{background:transparent;border-color:transparent;color:var(--text3);padding:6px 10px}
@@ -49,7 +39,7 @@
   .btn-full{width:100%}
   .btn-icon{padding:6px;width:30px;height:30px}
   .sidebar-section{padding:16px 20px;border-bottom:1px solid var(--border)}
-  .section-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+  .section-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
   .filter-item{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;margin-bottom:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;position:relative}
   .filter-item select,.filter-item input{font-size:12px;padding:6px 10px}
   .filter-item .filter-val{grid-column:1/-1}
@@ -68,7 +58,7 @@
   .table-scroll{overflow-x:auto}
   table{width:100%;border-collapse:collapse;font-size:13px}
   thead{background:var(--surface2)}
-  th{padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+  th{padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
   th:hover{color:var(--text2)}
   th.sorted{color:var(--accent2)}
   td{padding:11px 16px;border-bottom:1px solid var(--border);color:var(--text2);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
@@ -76,7 +66,6 @@
   tbody tr{transition:background .1s;cursor:pointer}
   tbody tr:hover td{background:var(--surface2);color:var(--text)}
   .id-link{color:var(--accent2);font-family:var(--mono);font-size:12px;font-weight:500;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
-  tbody tr:hover .id-link{color:var(--accent)}
   .badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:500;font-family:var(--mono)}
   .badge-true{background:var(--green-bg);color:var(--green)}
   .badge-false{background:rgba(90,90,114,0.2);color:var(--text3)}
@@ -97,27 +86,29 @@
   ::-webkit-scrollbar{width:6px;height:6px}
   ::-webkit-scrollbar-track{background:transparent}
   ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-  ::-webkit-scrollbar-thumb:hover{background:var(--text3)}
-  .chip{background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:3px 10px;font-size:11px;color:var(--text3);font-family:var(--mono)}
+  /* Highlight fields */
+  .highlight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+  .highlight-item{background:var(--accent-dim);border:1px solid rgba(124,107,255,0.2);border-radius:var(--radius);padding:10px 14px}
+  .highlight-key{font-size:10px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+  .highlight-val{font-size:14px;color:var(--text);font-weight:500;word-break:break-word}
   /* Modal */
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:300;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
   .modal-overlay.open{display:flex}
-  .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);width:100%;max-width:920px;max-height:92vh;overflow-y:auto;display:flex;flex-direction:column}
+  .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);width:100%;max-width:960px;max-height:92vh;overflow-y:auto;display:flex;flex-direction:column}
   .modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1}
-  .modal-title{font-size:16px;font-weight:600;letter-spacing:-0.02em}
+  .modal-title{font-size:16px;font-weight:600;letter-spacing:-.02em}
   .modal-id{font-size:12px;color:var(--text3);font-family:var(--mono);margin-top:2px}
-  .modal-tabs{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--border);background:var(--surface)}
+  .modal-tabs{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--border);background:var(--surface);flex-wrap:wrap}
   .tab-btn{padding:10px 16px;font-size:13px;font-weight:500;color:var(--text3);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;font-family:var(--sans)}
   .tab-btn:hover{color:var(--text2)}
   .tab-btn.active{color:var(--accent2);border-bottom-color:var(--accent)}
   .tab-panel{display:none;padding:24px}
   .tab-panel.active{display:block}
-  .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
   .photo-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-  .photo-card img{width:100%;max-height:340px;object-fit:contain;background:#0a0a0d;display:block;cursor:zoom-in}
+  .photo-card img{width:100%;max-height:300px;object-fit:contain;background:#0a0a0d;display:block;cursor:zoom-in}
   .photo-label{padding:10px 14px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;justify-content:space-between}
   .photo-label a{color:var(--accent2);font-size:11px;text-decoration:none}
-  .photo-label a:hover{text-decoration:underline}
   .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:500;align-items:center;justify-content:center;cursor:zoom-out}
   .lightbox.open{display:flex}
   .lightbox img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:var(--radius)}
@@ -133,7 +124,7 @@
   .field-val.empty{color:var(--text3);font-style:italic}
   .no-media{color:var(--text3);font-size:13px;text-align:center;padding:40px 0}
   .no-media .icon{font-size:32px;margin-bottom:10px;opacity:.3}
-  @media(max-width:700px){.sidebar{display:none}.main-header{padding:14px 16px}.results-area{padding:14px 16px}.photo-grid{grid-template-columns:1fr}}
+  @media(max-width:700px){.sidebar{display:none}.main-header,.results-area{padding:14px 16px}.photo-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -141,36 +132,29 @@
   <aside class="sidebar">
     <div class="sidebar-header">
       <div class="logo">
-        <div class="logo-icon">🎮</div>
+        <div class="logo-icon" id="logo-icon">🗄️</div>
         <div>
-          <div class="logo-text">Archivio Videogames</div>
-          <div class="logo-sub">Database Videogames</div>
+          <div class="logo-text" id="logo-text">Archivio</div>
+          <div class="logo-sub" id="logo-sub">Database</div>
         </div>
       </div>
       <div class="status-row">
         <span class="status-dot" id="status-dot"></span>
-        <span id="status-text">Connessione in corso...</span>
+        <span id="status-text">Connessione...</span>
       </div>
     </div>
-
     <div class="sidebar-section">
       <div class="section-title">Ordinamento</div>
-      <div class="field">
-        <label>Colonna</label>
-        <select id="sort-col"><option value="">— Nessuno —</option></select>
-      </div>
-      <div class="field">
-        <label>Direzione</label>
+      <div class="field"><label>Colonna</label><select id="sort-col"><option value="">— Nessuno —</option></select></div>
+      <div class="field"><label>Direzione</label>
         <select id="sort-dir">
-          <option value="asc">↑ Crescente (A→Z)</option>
-          <option value="desc">↓ Decrescente (Z→A)</option>
+          <option value="asc">↑ Crescente</option>
+          <option value="desc">↓ Decrescente</option>
         </select>
       </div>
     </div>
-
     <div class="sidebar-section" style="flex:1">
-      <div class="section-title">
-        Filtri
+      <div class="section-title">Filtri
         <button class="btn btn-ghost btn-sm" onclick="addFilter()" style="font-size:18px;padding:0 4px;line-height:1">+</button>
       </div>
       <div id="filter-list"></div>
@@ -179,15 +163,11 @@
         <button class="btn btn-primary btn-sm" onclick="runSearch(1)" style="flex:1">Applica</button>
       </div>
     </div>
-
     <div class="sidebar-section">
-      <div class="field">
-        <label>Righe per pagina</label>
+      <div class="field"><label>Righe per pagina</label>
         <select id="page-size" onchange="runSearch(1)">
-          <option value="10">10</option>
-          <option value="25" selected>25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
+          <option value="10">10</option><option value="25" selected>25</option>
+          <option value="50">50</option><option value="100">100</option>
         </select>
       </div>
     </div>
@@ -196,15 +176,15 @@
   <main class="main">
     <div class="main-header">
       <div class="search-wrap">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" class="search-input" id="quick-search" placeholder="Ricerca rapida..." oninput="debounceSearch()" />
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="quick-search" placeholder="Ricerca rapida..." oninput="debounceSearch()"/>
       </div>
       <button class="btn" onclick="exportCSV()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Esporta CSV
       </button>
       <button class="btn btn-primary" onclick="runSearch(1)">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         Cerca
       </button>
     </div>
@@ -218,127 +198,127 @@
 <div class="modal-overlay" id="modal-overlay" onclick="overlayClick(event)">
   <div class="modal">
     <div class="modal-header">
-      <div>
-        <div class="modal-title" id="modal-title">Dettaglio</div>
-        <div class="modal-id" id="modal-id"></div>
-      </div>
+      <div><div class="modal-title" id="modal-title">Dettaglio</div><div class="modal-id" id="modal-id"></div></div>
       <button class="btn btn-ghost btn-icon" onclick="closeModal()" style="font-size:18px;line-height:1">✕</button>
     </div>
-    <div class="modal-tabs">
-      <button class="tab-btn active" onclick="switchTab('foto')">📷 Foto</button>
-      <button class="tab-btn" onclick="switchTab('xml')">📄 XML</button>
-      <button class="tab-btn" onclick="switchTab('campi')">📋 Campi</button>
-    </div>
-    <div id="tab-foto" class="tab-panel active"></div>
-    <div id="tab-xml"  class="tab-panel"></div>
-    <div id="tab-campi" class="tab-panel"></div>
+    <div class="modal-tabs" id="modal-tabs"></div>
+    <div id="tab-highlight" class="tab-panel"></div>
+    <div id="tab-foto"      class="tab-panel"></div>
+    <div id="tab-xml"       class="tab-panel"></div>
+    <div id="tab-campi"     class="tab-panel"></div>
   </div>
 </div>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="Foto ingrandita" />
+  <img id="lightbox-img" src="" alt="Foto ingrandita"/>
 </div>
 
 <script>
-// ── Config campi media ─────────────────────────────────
-// Adatta questi nomi se li hai chiamati diversamente in NocoDB
-const MEDIA = { fronte:'FOTO_FRONTE', retro:'FOTO_RETRO', supporto fronnte: 'FOTO_SUPPORTO_FRONTE', supporto retro: 'FOTO_SUPPORTO_RETRO', mods:'XML_MODS', premis:'XML_PREMIS' };
+// ── Config da backend ──────────────────────────────────
+let CFG = {
+  projectName:"Archivio", projectEmoji:"🗄️", projectSub:"Database",
+  highlightFields:[], fotoFields:[], xmlFields:[], hideFromTable:[]
+};
 
 // ── State ──────────────────────────────────────────────
 let columns=[], currentPage=1, totalRows=0, sortedCol='', sortDir='asc', debTimer=null, allData=[];
 
-// ── API — punta al backend locale, zero token nel browser
-async function apiFetch(params={}) {
-  const url = new URL('/api/records', window.location.origin);
-  Object.entries(params).forEach(([k,v])=>{ if(v!==undefined&&v!=='') url.searchParams.set(k,String(v)); });
-  const r = await fetch(url.toString());
-  if(!r.ok){ const t=await r.text(); throw new Error(`${r.status}: ${t.slice(0,200)}`); }
+async function apiFetch(params={}){
+  const url=new URL('/api/records',window.location.origin);
+  Object.entries(params).forEach(([k,v])=>{if(v!==undefined&&v!=='')url.searchParams.set(k,String(v));});
+  const r=await fetch(url.toString());
+  if(!r.ok){const t=await r.text();throw new Error(`${r.status}: ${t.slice(0,200)}`);}
   return r.json();
 }
 
-function normalizeResponse(data){
-  const list  = data.list||data.records||[];
-  const total = data.pageInfo?.totalRows??data.pageInfo?.totalRecords??list.length;
-  return {list,total};
+function norm(data){
+  const list=data.list||data.records||[];
+  const total=data.pageInfo?.totalRows??data.pageInfo?.totalRecords??list.length;
+  return{list,total};
 }
 
-// ── Init: connessione automatica ───────────────────────
 async function init(){
-  try {
-    const r = await fetch('/api/health');
-    if(!r.ok) throw new Error('Backend non raggiungibile');
-    const data = await apiFetch({limit:1});
-    const {list} = normalizeResponse(data);
+  // Carica config dal backend
+  try{
+    const cfg=await fetch('/api/config').then(r=>r.json());
+    Object.assign(CFG,cfg);
+    document.getElementById('logo-icon').textContent = CFG.projectEmoji;
+    document.getElementById('logo-text').textContent = CFG.projectName;
+    document.getElementById('logo-sub').textContent  = CFG.projectSub;
+    document.title = CFG.projectName;
+  }catch(e){}
+
+  try{
+    const data=await apiFetch({limit:1});
+    const{list}=norm(data);
     if(list.length>0) columns=Object.keys(list[0]).filter(k=>!k.startsWith('nc_')&&k!=='Id'&&k!=='id');
     setStatus('ok','Connesso');
     populateSelects();
     addFilter();
     runSearch(1);
-  } catch(e){
+  }catch(e){
     setStatus('err','Errore: '+e.message.slice(0,50));
     showError(e.message);
   }
 }
 
 // ── Filters ────────────────────────────────────────────
-let filterCount=0;
-const OPS=[['eq','= uguale a'],['neq','≠ diverso da'],['like','∋ contiene'],['nlike','∌ non contiene'],['gt','> maggiore'],['lt','< minore'],['gte','≥'],['lte','≤'],['empty','∅ vuoto'],['notempty','≠∅ non vuoto']];
+let fc=0;
+const OPS=[['eq','= uguale'],['neq','≠ diverso'],['like','∋ contiene'],['nlike','∌ non contiene'],['gt','> maggiore'],['lt','< minore'],['gte','≥'],['lte','≤'],['empty','∅ vuoto'],['notempty','≠∅ non vuoto']];
 
 function addFilter(){
-  const id=++filterCount, list=document.getElementById('filter-list');
+  const id=++fc,list=document.getElementById('filter-list');
   if(list.children.length>0){const l=document.createElement('div');l.className='filter-logic';l.textContent='AND';l.id='logic-'+id;list.appendChild(l);}
-  const div=document.createElement('div'); div.className='filter-item'; div.id='fi-'+id;
-  const colOpts=columns.length?columns.map(c=>`<option value="${c}">${c}</option>`).join(''):'<option value="">—</option>';
-  const opOpts=OPS.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
-  div.innerHTML=`<select onchange="fopChange(${id})">${colOpts}</select><select id="fop-${id}" onchange="fopChange(${id})">${opOpts}</select><input type="text" id="fval-${id}" class="filter-val" placeholder="valore..."/><button class="btn btn-ghost btn-icon filter-remove btn-danger" onclick="rmFilter(${id})">✕</button>`;
+  const div=document.createElement('div');div.className='filter-item';div.id='fi-'+id;
+  const co=columns.length?columns.map(c=>`<option value="${c}">${c}</option>`).join(''):'<option>—</option>';
+  const oo=OPS.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+  div.innerHTML=`<select onchange="foc(${id})">${co}</select><select id="fop-${id}" onchange="foc(${id})">${oo}</select><input type="text" id="fval-${id}" class="filter-val" placeholder="valore..."/><button class="btn btn-ghost btn-icon filter-remove btn-danger" onclick="rmf(${id})">✕</button>`;
   list.appendChild(div);
 }
-function fopChange(id){const op=document.getElementById('fop-'+id).value;const el=document.getElementById('fval-'+id);if(el)el.classList.toggle('hidden',['empty','notempty'].includes(op));}
-function rmFilter(id){document.getElementById('fi-'+id)?.remove();document.getElementById('logic-'+id)?.remove();}
-function clearFilters(){document.getElementById('filter-list').innerHTML='';filterCount=0;}
+function foc(id){const op=document.getElementById('fop-'+id).value;const el=document.getElementById('fval-'+id);if(el)el.classList.toggle('hidden',['empty','notempty'].includes(op));}
+function rmf(id){document.getElementById('fi-'+id)?.remove();document.getElementById('logic-'+id)?.remove();}
+function clearFilters(){document.getElementById('filter-list').innerHTML='';fc=0;}
 function buildWhere(){
-  const parts=[];
-  document.querySelectorAll('.filter-item').forEach(row=>{
-    const sels=row.querySelectorAll('select');const inp=row.querySelector('input.filter-val');
-    if(!sels[0]||!sels[1])return;
-    const col=sels[0].value,op=sels[1].value,val=inp?inp.value:'';
-    if(!col)return;
-    if(['empty','notempty'].includes(op))parts.push(`(${col},${op})`);
-    else if(val!=='')parts.push(`(${col},${op},${val})`);
+  const p=[];
+  document.querySelectorAll('.filter-item').forEach(r=>{
+    const s=r.querySelectorAll('select'),i=r.querySelector('input.filter-val');
+    if(!s[0]||!s[1])return;
+    const c=s[0].value,o=s[1].value,v=i?i.value:'';
+    if(!c)return;
+    if(['empty','notempty'].includes(o))p.push(`(${c},${o})`);
+    else if(v!=='')p.push(`(${c},${o},${v})`);
   });
-  return parts.join('~and');
+  return p.join('~and');
 }
 
-// ── Search ─────────────────────────────────────────────
 function debounceSearch(){clearTimeout(debTimer);debTimer=setTimeout(()=>runSearch(1),350);}
+
 async function runSearch(page=1){
-  currentPage=page; showLoading();
-  const where=buildWhere(), q=document.getElementById('quick-search').value.trim();
-  const sortCol=document.getElementById('sort-col').value, sDir=document.getElementById('sort-dir').value;
-  const pageSize=parseInt(document.getElementById('page-size').value);
-  const params={limit:pageSize,offset:(page-1)*pageSize};
+  currentPage=page;showLoading();
+  const where=buildWhere(),q=document.getElementById('quick-search').value.trim();
+  const sc=document.getElementById('sort-col').value,sd=document.getElementById('sort-dir').value;
+  const ps=parseInt(document.getElementById('page-size').value);
+  const params={limit:ps,offset:(page-1)*ps};
   let wc=where;
   if(q&&columns.length){const qp=columns.slice(0,6).map(c=>`(${c},like,%${q}%)`).join('~or');wc=where?`(${where})~and(${qp})`:qp;}
   if(wc)params.where=wc;
-  if(sortCol)params.sort=(sDir==='desc'?'-':'')+sortCol;
+  if(sc)params.sort=(sd==='desc'?'-':'')+sc;
   try{
     const data=await apiFetch(params);
-    const{list,total}=normalizeResponse(data);
+    const{list,total}=norm(data);
     totalRows=total;allData=list;
     if(allData.length>0&&columns.length===0){columns=Object.keys(allData[0]).filter(k=>!k.startsWith('nc_')&&k!=='Id'&&k!=='id');populateSelects();}
     renderResults(allData,total);
   }catch(e){showError(e.message);}
 }
 
-// ── Render ─────────────────────────────────────────────
-const mediaSet=()=>new Set(Object.values(MEDIA).filter(Boolean));
 function renderResults(rows,total){
   const area=document.getElementById('results-area');
-  const pageSize=parseInt(document.getElementById('page-size').value);
-  const pages=Math.ceil(total/pageSize);
+  const ps=parseInt(document.getElementById('page-size').value);
+  const pages=Math.ceil(total/ps);
   if(!rows.length){area.innerHTML=`<div class="empty-state"><div class="icon">🔍</div><p>Nessun risultato</p></div>`;return;}
-  const ms=mediaSet();
-  const cols=(columns.length?columns:Object.keys(rows[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!ms.has(k));
+  const hidden=new Set(CFG.hideFromTable);
+  const cols=(columns.length?columns:Object.keys(rows[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!hidden.has(k));
   const thead=`<thead><tr>${cols.map(c=>`<th onclick="sortBy('${c}')" class="${sortedCol===c?'sorted':''}">${c}${sortedCol===c?(sortDir==='asc'?' ↑':' ↓'):''}</th>`).join('')}</tr></thead>`;
   const tbody='<tbody>'+rows.map((row,i)=>{
     const cells=cols.map(col=>{
@@ -355,21 +335,20 @@ function renderResults(rows,total){
   }).join('')+'</tbody>';
   let pag='';
   if(pages>1){
-    let btns=`<button class="pag-btn" onclick="runSearch(${currentPage-1})" ${currentPage<=1?'disabled':''}>‹</button>`;
+    let b=`<button class="pag-btn" onclick="runSearch(${currentPage-1})" ${currentPage<=1?'disabled':''}>‹</button>`;
     for(let i=1;i<=pages;i++){
-      if(i===1||i===pages||Math.abs(i-currentPage)<=1)btns+=`<button class="pag-btn ${i===currentPage?'active':''}" onclick="runSearch(${i})">${i}</button>`;
-      else if(Math.abs(i-currentPage)===2)btns+=`<span style="color:var(--text3);padding:0 4px;line-height:32px">…</span>`;
+      if(i===1||i===pages||Math.abs(i-currentPage)<=1)b+=`<button class="pag-btn ${i===currentPage?'active':''}" onclick="runSearch(${i})">${i}</button>`;
+      else if(Math.abs(i-currentPage)===2)b+=`<span style="color:var(--text3);padding:0 4px;line-height:32px">…</span>`;
     }
-    btns+=`<button class="pag-btn" onclick="runSearch(${currentPage+1})" ${currentPage>=pages?'disabled':''}>›</button>`;
-    const from=(currentPage-1)*pageSize+1,to=Math.min(currentPage*pageSize,total);
-    pag=`<div class="pagination"><span class="pag-info">Riga ${from}–${to} di ${total.toLocaleString('it-IT')}</span><div class="pag-btns">${btns}</div></div>`;
+    b+=`<button class="pag-btn" onclick="runSearch(${currentPage+1})" ${currentPage>=pages?'disabled':''}>›</button>`;
+    const from=(currentPage-1)*ps+1,to=Math.min(currentPage*ps,total);
+    pag=`<div class="pagination"><span class="pag-info">Riga ${from}–${to} di ${total.toLocaleString('it-IT')}</span><div class="pag-btns">${b}</div></div>`;
   }
   area.innerHTML=`
     <div class="stats-bar">
       <div class="stat-pill">Risultati: <span>${total.toLocaleString('it-IT')}</span></div>
       <div class="stat-pill">Pagina: <span>${currentPage} / ${pages||1}</span></div>
-      <div class="chip">${rows.length} mostrate</div>
-      <div style="margin-left:auto;font-size:11px;color:var(--text3)">Clicca una riga per foto e documenti</div>
+      <div style="margin-left:auto;font-size:11px;color:var(--text3)">Clicca una riga per i dettagli</div>
     </div>
     <div class="table-container"><div class="table-scroll"><table>${thead}${tbody}</table></div>${pag}</div>`;
 }
@@ -383,63 +362,92 @@ function sortBy(col){
 }
 
 function exportCSV(){
-  if(!allData.length){alert('Nessun dato da esportare.');return;}
-  const ms=mediaSet();
-  const cols=(columns.length?columns:Object.keys(allData[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!ms.has(k));
+  if(!allData.length){alert('Nessun dato.');return;}
+  const hidden=new Set(CFG.hideFromTable);
+  const cols=(columns.length?columns:Object.keys(allData[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!hidden.has(k));
   const csv=[cols.join(','),...allData.map(r=>cols.map(c=>`"${String(r[c]??'').replace(/"/g,'""')}"`).join(','))].join('\n');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));
-  a.download='archivio-mtg.csv';a.click();
+  a.download='export.csv';a.click();
 }
 
 // ── Modal ──────────────────────────────────────────────
 function openDetail(i){
-  const row=allData[i]; if(!row)return;
-  const ms=mediaSet();
-  const firstCol=columns.find(k=>!ms.has(k))||columns[0]||'';
-  const id=row['IDENTIFICATORE']||row[firstCol]||row['Id']||'';
-  document.getElementById('modal-title').textContent=row['NOME']||row['TITOLO']||row['NAME']||id;
+  const row=allData[i];if(!row)return;
+  const hidden=new Set(CFG.hideFromTable);
+  const firstVisible=columns.find(k=>!hidden.has(k))||columns[0]||'';
+  const id=row['IDENTIFICATORE']||row[firstVisible]||row['Id']||'';
+  // Titolo: primo campo highlight o primo campo visibile
+  const titleField=CFG.highlightFields[0]||firstVisible;
+  document.getElementById('modal-title').textContent=row[titleField]||id;
   document.getElementById('modal-id').textContent=id?`ID: ${id}`:'';
 
-  // Foto
-  const fronte=parseAtt(row[MEDIA.fronte]), retro=parseAtt(row[MEDIA.retro]);
-  let fotoHTML='';
-  if(fronte.length||retro.length){
-    const cards=[];
-    if(fronte.length){const u=resolveUrl(fronte[0]);cards.push(`<div class="photo-card"><img src="${u}" alt="Fronte" loading="lazy" onclick="openLightbox('${u}')"><div class="photo-label">📷 Fronte<a href="${u}" download target="_blank">↓ Scarica</a></div></div>`);}
-    if(retro.length){const u=resolveUrl(retro[0]);cards.push(`<div class="photo-card"><img src="${u}" alt="Retro" loading="lazy" onclick="openLightbox('${u}')"><div class="photo-label">🔄 Retro<a href="${u}" download target="_blank">↓ Scarica</a></div></div>`);}
-    fotoHTML=`<div class="photo-grid">${cards.join('')}</div>`;
-  }else{fotoHTML=`<div class="no-media"><div class="icon">📷</div><p>Nessuna foto caricata</p></div>`;}
-  document.getElementById('tab-foto').innerHTML=fotoHTML;
+  // Costruisce tab dinamicamente in base a cosa c'è
+  const tabs=[];
+  if(CFG.highlightFields.length) tabs.push({id:'highlight',label:'⭐ Scheda'});
+  if(CFG.fotoFields.length)      tabs.push({id:'foto',     label:'📷 Foto'});
+  if(CFG.xmlFields.length)       tabs.push({id:'xml',      label:'📄 XML'});
+  tabs.push({id:'campi', label:'📋 Tutti i campi'});
 
-  // XML
-  const modsXml=row[MEDIA.mods]||'', premisXml=row[MEDIA.premis]||'';
-  let xmlHTML='';
-  if(modsXml||premisXml){
-    if(modsXml)xmlHTML+=buildXmlSection('MODS',modsXml);
-    if(premisXml)xmlHTML+=buildXmlSection('PREMIS',premisXml);
-  }else{xmlHTML=`<div class="no-media"><div class="icon">📄</div><p>Nessun XML caricato</p></div>`;}
-  document.getElementById('tab-xml').innerHTML=xmlHTML;
+  document.getElementById('modal-tabs').innerHTML=tabs.map((t,i)=>
+    `<button class="tab-btn ${i===0?'active':''}" onclick="switchTab('${t.id}')">${t.label}</button>`
+  ).join('');
 
-  // Campi
-  const exclude=new Set([...ms,'Id','id','ncRecordId']);
+  // Tab Scheda (highlight)
+  if(CFG.highlightFields.length){
+    const items=CFG.highlightFields.filter(f=>row[f]!==undefined&&row[f]!==null&&row[f]!=='').map(f=>`
+      <div class="highlight-item">
+        <div class="highlight-key">${f}</div>
+        <div class="highlight-val">${row[f]}</div>
+      </div>`).join('');
+    document.getElementById('tab-highlight').innerHTML=`<div class="highlight-grid">${items}</div>`;
+  }
+
+  // Tab Foto
+  if(CFG.fotoFields.length){
+    const cards=CFG.fotoFields.map(field=>{
+      const att=parseAtt(row[field]);
+      if(!att.length)return'';
+      const u=resolveUrl(att[0]);
+      const label=field.replace(/_/g,' ');
+      return`<div class="photo-card">
+        <img src="${u}" alt="${label}" loading="lazy" onclick="openLightbox('${u}')" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">${label}<a href="${u}" download target="_blank">↓</a></div>
+      </div>`;
+    }).filter(Boolean).join('');
+    document.getElementById('tab-foto').innerHTML=cards
+      ?`<div class="photo-grid">${cards}</div>`
+      :`<div class="no-media"><div class="icon">📷</div><p>Nessuna foto caricata</p></div>`;
+  }
+
+  // Tab XML
+  if(CFG.xmlFields.length){
+    const xmlHTML=CFG.xmlFields.map(field=>{
+      const content=row[field]||'';
+      if(!content)return'';
+      return buildXmlSection(field.replace(/_/g,' '),content);
+    }).filter(Boolean).join('');
+    document.getElementById('tab-xml').innerHTML=xmlHTML||`<div class="no-media"><div class="icon">📄</div><p>Nessun XML caricato</p></div>`;
+  }
+
+  // Tab tutti i campi
+  const exclude=new Set([...CFG.hideFromTable,'Id','id','ncRecordId']);
   const items=Object.entries(row).filter(([k])=>!exclude.has(k)&&!k.startsWith('nc_')).map(([k,v])=>{
     const d=(v===null||v===undefined||v==='')?'':typeof v==='object'?JSON.stringify(v):String(v);
     return`<div class="field-item"><div class="field-key">${k}</div><div class="field-val ${!d?'empty':''}">${d||'—'}</div></div>`;
   }).join('');
   document.getElementById('tab-campi').innerHTML=`<div class="fields-grid">${items}</div>`;
 
-  switchTab('foto');
+  switchTab(tabs[0].id);
   document.getElementById('modal-overlay').classList.add('open');
 }
 
 function buildXmlSection(label,xml){
-  const h=highlightXml(xml.trim());
-  const blob=new Blob([xml],{type:'application/xml'});
-  const dl=URL.createObjectURL(blob);
-  return`<div class="xml-section"><div class="xml-toolbar"><span class="xml-label">${label}</span><a href="${dl}" download="${label.toLowerCase()}.xml" class="btn btn-sm">↓ Scarica XML</a></div><pre class="xml-code">${h}</pre></div>`;
+  const h=hxml(xml.trim());
+  const dl=URL.createObjectURL(new Blob([xml],{type:'application/xml'}));
+  return`<div class="xml-section"><div class="xml-toolbar"><span class="xml-label">${label}</span><a href="${dl}" download="${label.toLowerCase().replace(/ /g,'_')}.xml" class="btn btn-sm">↓ XML</a></div><pre class="xml-code">${h}</pre></div>`;
 }
-function highlightXml(x){
+function hxml(x){
   return x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/(&lt;\?[^?]*\?&gt;)/g,'<span class="xml-comment">$1</span>')
     .replace(/(&lt;!--[\s\S]*?--&gt;)/g,'<span class="xml-comment">$1</span>')
@@ -447,16 +455,26 @@ function highlightXml(x){
     .replace(/([\w:.-]+)=(&quot;)(.*?)(\2)/g,'<span class="xml-attr">$1</span>=<span class="xml-val">&quot;$3&quot;</span>');
 }
 function parseAtt(val){if(!val)return[];if(typeof val==='string'){try{val=JSON.parse(val);}catch{return[];}}return Array.isArray(val)?val:[];}
-function resolveUrl(att){if(!att)return'';if(att.signedUrl)return att.signedUrl;if(att.url)return att.url;if(att.path)return att.path.startsWith('http')?att.path:`https://app.nocodb.com/${att.path}`;return'';}
-function switchTab(n){document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['foto','xml','campi'][i]===n));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');}
+function resolveUrl(a){if(!a)return'';if(a.signedUrl)return a.signedUrl;if(a.url)return a.url;if(a.path)return a.path.startsWith('http')?a.path:`https://app.nocodb.com/${a.path}`;return'';}
+function switchTab(n){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.onclick.toString().includes(`'${n}'`)));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('tab-'+n);if(el)el.classList.add('active');
+}
 function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
 function overlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
 function openLightbox(u){document.getElementById('lightbox-img').src=u;document.getElementById('lightbox').classList.add('open');}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
-function populateSelects(){const s=document.getElementById('sort-col');s.innerHTML='<option value="">— Nessuno —</option>'+columns.map(c=>`<option value="${c}">${c}</option>`).join('');document.querySelectorAll('.filter-item select:first-child').forEach(sel=>{const cur=sel.value;sel.innerHTML=columns.map(c=>`<option value="${c}"${c===cur?' selected':''}>${c}</option>`).join('');});}
+function populateSelects(){
+  const s=document.getElementById('sort-col');
+  s.innerHTML='<option value="">— Nessuno —</option>'+columns.map(c=>`<option value="${c}">${c}</option>`).join('');
+  document.querySelectorAll('.filter-item select:first-child').forEach(sel=>{
+    const cur=sel.value;sel.innerHTML=columns.map(c=>`<option value="${c}"${c===cur?' selected':''}>${c}</option>`).join('');
+  });
+}
 function showLoading(){document.getElementById('results-area').innerHTML=`<div class="loader"><div class="spin"></div>Caricamento...</div>`;}
 function showError(msg){document.getElementById('results-area').innerHTML=`<div class="error-banner"><span>⚠</span><div><strong>Errore</strong><br><span style="font-family:var(--mono);font-size:12px">${msg}</span></div></div>`;}
-function setStatus(s,msg){document.getElementById('status-dot').className='status-dot '+(s==='ok'?'ok':s==='err'?'err':'');document.getElementById('status-text').textContent=msg;}
+function setStatus(s,msg){document.getElementById('status-dot').className='status-dot '+(s==='ok'?'ok':'err');document.getElementById('status-text').textContent=msg;}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeLightbox();}});
 
 init();
