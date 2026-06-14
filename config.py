@@ -31,7 +31,7 @@ ID_COLUMN   = "IDENTIFICATORE"
 # ── Colonne da mostrare in evidenza nella scheda dettaglio ──
 # Queste appaiono in cima alla scheda quando clicchi una riga
 # Lascia vuoto [] per mostrarle tutte
-HIGHLIGHT_FIELDS = ["IDENTIFICATORE", "SOFTWARE", "TITOLO", "GENERE", "SVILUPPATORE", "PRODUTTORE", "ANNO", "SUPPORTO", "CONDIZIONI" , "PROVENIENZA"]
+HIGHLIGHT_FIELDS = []
 
 # ── Campi foto ────────────────────────────────────────
 # Formato: { "NOME_CAMPO_NOCODB": "suffisso_nel_nome_file" }
@@ -40,7 +40,7 @@ HIGHLIGHT_FIELDS = ["IDENTIFICATORE", "SOFTWARE", "TITOLO", "GENERE", "SVILUPPAT
 FOTO_FIELDS = {
     "FOTO_FRONTE": "_case_fronte",
     "FOTO_RETRO":  "_case_retro",
-    "FOTO_SUPPORTO_FRONTE":  "_supp_retro",
+    "FOTO_SUPPORTO_FRONTE":  "_supp_fronte",
     "FOTO_SUPPORTO_RETRO":  "_supp_retro",
     # Aggiungi altre foto qui, es:
     # "FOTO_DETTAGLIO": "_supp_fronte",
@@ -97,8 +97,12 @@ EXCEL_SHEETS = [
 # Di default nasconde automaticamente i campi foto e XML
 # Aggiungi qui altri campi da nascondere dalla tabella
 HIDE_FROM_TABLE = [
-    # "NOTE_INTERNE",
-    # "DESCRIZIONE_LUNGA",
+      "FOTO_FRONTE",
+      "FOTO_RETRO",
+      "FOTO_SUPPORTO_FRONTE",
+      "FOTO_SUPPORTO_RETRO",
+      "XML_MODS",
+      "XML_PREMIS",
 ]
 
 # ==============================================================================
