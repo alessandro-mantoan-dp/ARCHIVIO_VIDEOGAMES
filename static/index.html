@@ -205,25 +205,15 @@
         <div class="modal-id" id="modal-id"></div>
       </div>
 
-      <button class="btn btn-ghost btn-icon" onclick="closeModal()">✕</button>
+      <button class="btn btn-ghost btn-icon" onclick="closeModal()" style="font-size:18px;line-height:1">✕</button>
     </div>
 
     <!-- TAB BUTTONS -->
     <div class="modal-tabs">
-      <button class="tab-btn active" onclick="setActiveTab('highlight')">Highlight</button>
-      <button class="tab-btn" onclick="setActiveTab('foto')">Foto</button>
-      <button class="tab-btn" onclick="setActiveTab('xml')">XML</button>
-      <button class="tab-btn" onclick="setActiveTab('campi')">Campi</button>
+      <button class="tab-btn active" onclick="switchTab('foto')">📷 Foto</button>
+      <button class="tab-btn" onclick="switchTab('xml')">📄 XML</button>
+      <button class="tab-btn" onclick="switchTab('campi')">📋 Campi</button>
     </div>
-
-    <!-- PANELS -->
-    <div id="tab-highlight" class="tab-panel active"></div>
-    <div id="tab-foto" class="tab-panel"></div>
-    <div id="tab-xml" class="tab-panel"></div>
-    <div id="tab-campi" class="tab-panel"></div>
-
-  </div>
-</div>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <img id="lightbox-img" src="" alt="Foto ingrandita"/>
