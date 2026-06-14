@@ -98,10 +98,11 @@
   .modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1}
   .modal-title{font-size:16px;font-weight:600;letter-spacing:-.02em}
   .modal-id{font-size:12px;color:var(--text3);font-family:var(--mono);margin-top:2px}
-  .modal-tabs{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--border);background:var(--surface);flex-wrap:wrap}
+  .modal-tabs{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:61px;z-index:1;flex-wrap:wrap}
   .tab-btn{padding:10px 16px;font-size:13px;font-weight:500;color:var(--text3);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;font-family:var(--sans)}
   .tab-btn:hover{color:var(--text2)}
   .tab-btn.active{color:var(--accent2);border-bottom-color:var(--accent)}
+  /* Tab panels — tutti nascosti di default, .active li mostra */
   .tab-panel{display:none;padding:24px}
   .tab-panel.active{display:block}
   .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
@@ -109,6 +110,7 @@
   .photo-card img{width:100%;max-height:300px;object-fit:contain;background:#0a0a0d;display:block;cursor:zoom-in}
   .photo-label{padding:10px 14px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;justify-content:space-between}
   .photo-label a{color:var(--accent2);font-size:11px;text-decoration:none}
+  /* Lightbox — fuori dal modal, a z-index superiore */
   .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:500;align-items:center;justify-content:center;cursor:zoom-out}
   .lightbox.open{display:flex}
   .lightbox img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:var(--radius)}
@@ -194,27 +196,32 @@
   </main>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL — struttura fissa con i tre tab-panel sempre nel DOM -->
 <div class="modal-overlay" id="modal-overlay" onclick="overlayClick(event)">
   <div class="modal">
-
-    <!-- HEADER -->
     <div class="modal-header">
       <div>
         <div class="modal-title" id="modal-title">Dettaglio</div>
         <div class="modal-id" id="modal-id"></div>
       </div>
-
       <button class="btn btn-ghost btn-icon" onclick="closeModal()" style="font-size:18px;line-height:1">✕</button>
     </div>
 
-    <!-- TAB BUTTONS -->
-    <div class="modal-tabs">
-      <button class="tab-btn active" onclick="switchTab('foto')">📷 Foto</button>
-      <button class="tab-btn" onclick="switchTab('xml')">📄 XML</button>
-      <button class="tab-btn" onclick="switchTab('campi')">📋 Campi</button>
+    <!-- Tab bar fissa — i pulsanti sono sempre gli stessi tre -->
+    <div class="modal-tabs" id="modal-tabs">
+      <button class="tab-btn active" data-tab="foto"   onclick="switchTab('foto')">📷 Foto</button>
+      <button class="tab-btn"        data-tab="xml"    onclick="switchTab('xml')">📄 XML</button>
+      <button class="tab-btn"        data-tab="campi"  onclick="switchTab('campi')">📋 Campi</button>
     </div>
 
+    <!-- Pannelli — sempre nel DOM, visibilità gestita via .active -->
+    <div class="tab-panel active" id="tab-foto"></div>
+    <div class="tab-panel"        id="tab-xml"></div>
+    <div class="tab-panel"        id="tab-campi"></div>
+  </div>
+</div>
+
+<!-- Lightbox fuori dal modal -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <img id="lightbox-img" src="" alt="Foto ingrandita"/>
 </div>
@@ -222,8 +229,9 @@
 <script>
 // ── Config da backend ──────────────────────────────────
 let CFG = {
-  projectName:"Archivio", projectEmoji:"🗄️", projectSub:"Database",
-  highlightFields:[], fotoFields:[], xmlFields:[], hideFromTable:[]
+  projectName:"Archivio Videogames", projectEmoji:"🎮", projectSub:"Database Videogames",
+  highlightFields:[], fotoFields:[], xmlFields:[], hideFromTable:[],
+  columnOrder:["IDENTIFICATORE", "SOFTWARE", "TITOLO", "GENERE", "SVILUPPATORE", "PRODUTTORE", "ANNO", "SUPPORTO", "CONDIZIONI", "PROVENIENZA"]   // ← nuovo: array ordinato di colonne dal backend
 };
 
 // ── State ──────────────────────────────────────────────
@@ -243,6 +251,18 @@ function norm(data){
   return{list,total};
 }
 
+// Ricava l'ordine colonne privilegiando: 1) CFG.columnOrder, 2) chiavi primo record
+function deriveColumns(firstRecord){
+  const raw=Object.keys(firstRecord).filter(k=>!k.startsWith('nc_')&&k!=='Id'&&k!=='id');
+  if(CFG.columnOrder&&CFG.columnOrder.length){
+    // Mette prima le colonne dichiarate nell'ordine voluto, poi eventuali extra
+    const ordered=CFG.columnOrder.filter(c=>raw.includes(c));
+    const extra=raw.filter(c=>!CFG.columnOrder.includes(c));
+    return [...ordered,...extra];
+  }
+  return raw;
+}
+
 async function init(){
   // Carica config dal backend
   try{
@@ -257,7 +277,7 @@ async function init(){
   try{
     const data=await apiFetch({limit:1});
     const{list}=norm(data);
-    if(list.length>0) columns=Object.keys(list[0]).filter(k=>!k.startsWith('nc_')&&k!=='Id'&&k!=='id');
+    if(list.length>0) columns=deriveColumns(list[0]);
     setStatus('ok','Connesso');
     populateSelects();
     addFilter();
@@ -313,7 +333,7 @@ async function runSearch(page=1){
     const data=await apiFetch(params);
     const{list,total}=norm(data);
     totalRows=total;allData=list;
-    if(allData.length>0&&columns.length===0){columns=Object.keys(allData[0]).filter(k=>!k.startsWith('nc_')&&k!=='Id'&&k!=='id');populateSelects();}
+    if(allData.length>0&&columns.length===0){columns=deriveColumns(allData[0]);populateSelects();}
     renderResults(allData,total);
   }catch(e){showError(e.message);}
 }
@@ -324,16 +344,17 @@ function renderResults(rows,total){
   const pages=Math.ceil(total/ps);
   if(!rows.length){area.innerHTML=`<div class="empty-state"><div class="icon">🔍</div><p>Nessun risultato</p></div>`;return;}
   const hidden=new Set(CFG.hideFromTable);
-  const cols=(columns.length?columns:Object.keys(rows[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!hidden.has(k));
+  const cols=columns.filter(k=>!hidden.has(k));
   const thead=`<thead><tr>${cols.map(c=>`<th onclick="sortBy('${c}')" class="${sortedCol===c?'sorted':''}">${c}${sortedCol===c?(sortDir==='asc'?' ↑':' ↓'):''}</th>`).join('')}</tr></thead>`;
   const tbody='<tbody>'+rows.map((row,i)=>{
-    const cells=cols.map(col=>{
+    const cells=cols.map((col,ci)=>{
       const v=row[col],raw=String(v??'');
       if(v===null||v===undefined||v==='')return`<td style="color:var(--text3)">—</td>`;
       if(typeof v==='boolean')return`<td><span class="badge badge-${v}">${v?'Sì':'No'}</span></td>`;
       if(typeof v==='number')return`<td><span class="badge badge-num">${v.toLocaleString('it-IT')}</span></td>`;
       if(typeof v==='object')return`<td><span style="color:var(--text3);font-family:var(--mono);font-size:11px">—</span></td>`;
-      if(col===cols[0])return`<td><span class="id-link">${raw}</span></td>`;
+      // Prima colonna visibile → link stilizzato
+      if(ci===0)return`<td><span class="id-link">${raw}</span></td>`;
       const d=raw.length>40?raw.slice(0,40)+'…':raw;
       return`<td title="${raw.replace(/"/g,'&quot;')}">${d}</td>`;
     }).join('');
@@ -370,7 +391,7 @@ function sortBy(col){
 function exportCSV(){
   if(!allData.length){alert('Nessun dato.');return;}
   const hidden=new Set(CFG.hideFromTable);
-  const cols=(columns.length?columns:Object.keys(allData[0]).filter(k=>!k.startsWith('nc_'))).filter(k=>!hidden.has(k));
+  const cols=columns.filter(k=>!hidden.has(k));
   const csv=[cols.join(','),...allData.map(r=>cols.map(c=>`"${String(r[c]??'').replace(/"/g,'""')}"`).join(','))].join('\n');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));
@@ -383,68 +404,60 @@ function openDetail(i){
   const hidden=new Set(CFG.hideFromTable);
   const firstVisible=columns.find(k=>!hidden.has(k))||columns[0]||'';
   const id=row['IDENTIFICATORE']||row[firstVisible]||row['Id']||'';
-  // Titolo: primo campo highlight o primo campo visibile
   const titleField=CFG.highlightFields[0]||firstVisible;
-  document.getElementById('modal-title').textContent=row[titleField]||id;
+  document.getElementById('modal-title').textContent=row[titleField]||id||'Dettaglio';
   document.getElementById('modal-id').textContent=id?`ID: ${id}`:'';
 
-  // Costruisce tab dinamicamente in base a cosa c'è
-  const tabs=[];
-  if(CFG.highlightFields.length) tabs.push({id:'highlight',label:'⭐ Scheda'});
-  if(CFG.fotoFields.length)      tabs.push({id:'foto',     label:'📷 Foto'});
-  if(CFG.xmlFields.length)       tabs.push({id:'xml',      label:'📄 XML'});
-  tabs.push({id:'campi', label:'📋 Tutti i campi'});
-
-  document.getElementById('modal-tabs').innerHTML=tabs.map((t,i)=>
-    `<button class="tab-btn ${i===0?'active':''}" onclick="switchTab('${t.id}')">${t.label}</button>`
-  ).join('');
-
-  // Tab Scheda (highlight)
-  if(CFG.highlightFields.length){
-    const items=CFG.highlightFields.filter(f=>row[f]!==undefined&&row[f]!==null&&row[f]!=='').map(f=>`
-      <div class="highlight-item">
-        <div class="highlight-key">${f}</div>
-        <div class="highlight-val">${row[f]}</div>
-      </div>`).join('');
-    document.getElementById('tab-highlight').innerHTML=`<div class="highlight-grid">${items}</div>`;
-  }
-
-  // Tab Foto
-  if(CFG.fotoFields.length){
+  // ── Tab FOTO ──────────────────────────────────────────
+  if(CFG.fotoFields && CFG.fotoFields.length){
     const cards=CFG.fotoFields.map(field=>{
       const att=parseAtt(row[field]);
       if(!att.length)return'';
       const u=resolveUrl(att[0]);
+      if(!u)return'';
       const label=field.replace(/_/g,' ');
       return`<div class="photo-card">
-        <img src="${u}" alt="${label}" loading="lazy" onclick="openLightbox('${u}')" onerror="this.parentElement.style.display='none'">
+        <img src="${u}" alt="${label}" loading="lazy" onclick="openLightbox('${u.replace(/'/g,"\\'")}')" onerror="this.parentElement.style.display='none'">
         <div class="photo-label">${label}<a href="${u}" download target="_blank">↓</a></div>
       </div>`;
     }).filter(Boolean).join('');
-    document.getElementById('tab-foto').innerHTML=cards
-      ?`<div class="photo-grid">${cards}</div>`
-      :`<div class="no-media"><div class="icon">📷</div><p>Nessuna foto caricata</p></div>`;
+    document.getElementById('tab-foto').innerHTML = cards
+      ? `<div class="photo-grid">${cards}</div>`
+      : `<div class="no-media"><div class="icon">📷</div><p>Nessuna foto caricata</p></div>`;
+  } else {
+    document.getElementById('tab-foto').innerHTML=
+      `<div class="no-media"><div class="icon">📷</div><p>Nessun campo foto configurato</p></div>`;
   }
 
-  // Tab XML
-  if(CFG.xmlFields.length){
+  // ── Tab XML ───────────────────────────────────────────
+  if(CFG.xmlFields && CFG.xmlFields.length){
     const xmlHTML=CFG.xmlFields.map(field=>{
       const content=row[field]||'';
       if(!content)return'';
       return buildXmlSection(field.replace(/_/g,' '),content);
     }).filter(Boolean).join('');
-    document.getElementById('tab-xml').innerHTML=xmlHTML||`<div class="no-media"><div class="icon">📄</div><p>Nessun XML caricato</p></div>`;
+    document.getElementById('tab-xml').innerHTML = xmlHTML
+      || `<div class="no-media"><div class="icon">📄</div><p>Nessun contenuto XML per questo record</p></div>`;
+  } else {
+    document.getElementById('tab-xml').innerHTML=
+      `<div class="no-media"><div class="icon">📄</div><p>Nessun campo XML configurato</p></div>`;
   }
 
-  // Tab tutti i campi
+  // ── Tab CAMPI ─────────────────────────────────────────
   const exclude=new Set([...CFG.hideFromTable,'Id','id','ncRecordId']);
-  const items=Object.entries(row).filter(([k])=>!exclude.has(k)&&!k.startsWith('nc_')).map(([k,v])=>{
+  // Rispetta l'ordine di `columns` anche nel modal
+  const orderedKeys=columns.filter(k=>!exclude.has(k)&&!k.startsWith('nc_'));
+  // Aggiunge eventuali chiavi presenti nel record ma non in columns
+  Object.keys(row).forEach(k=>{if(!orderedKeys.includes(k)&&!exclude.has(k)&&!k.startsWith('nc_'))orderedKeys.push(k);});
+  const items=orderedKeys.map(k=>{
+    const v=row[k];
     const d=(v===null||v===undefined||v==='')?'':typeof v==='object'?JSON.stringify(v):String(v);
     return`<div class="field-item"><div class="field-key">${k}</div><div class="field-val ${!d?'empty':''}">${d||'—'}</div></div>`;
   }).join('');
   document.getElementById('tab-campi').innerHTML=`<div class="fields-grid">${items}</div>`;
 
-  switchTab(tabs[0].id);
+  // Attiva sempre il primo tab (Foto)
+  switchTab('foto');
   document.getElementById('modal-overlay').classList.add('open');
 }
 
@@ -462,20 +475,36 @@ function hxml(x){
 }
 function parseAtt(val){if(!val)return[];if(typeof val==='string'){try{val=JSON.parse(val);}catch{return[];}}return Array.isArray(val)?val:[];}
 function resolveUrl(a){if(!a)return'';if(a.signedUrl)return a.signedUrl;if(a.url)return a.url;if(a.path)return a.path.startsWith('http')?a.path:`https://app.nocodb.com/${a.path}`;return'';}
+
+// switchTab usa data-tab per trovare il pannello — nessuna dipendenza da onclick.toString()
 function switchTab(n){
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.onclick.toString().includes(`'${n}'`)));
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.tab===n);
+  });
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  const el=document.getElementById('tab-'+n);if(el)el.classList.add('active');
+  const el=document.getElementById('tab-'+n);
+  if(el)el.classList.add('active');
 }
-function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
-function overlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
-function openLightbox(u){document.getElementById('lightbox-img').src=u;document.getElementById('lightbox').classList.add('open');}
-function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+function overlayClick(e){
+  if(e.target===document.getElementById('modal-overlay'))closeModal();
+}
+function openLightbox(u){
+  document.getElementById('lightbox-img').src=u;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
 function populateSelects(){
   const s=document.getElementById('sort-col');
   s.innerHTML='<option value="">— Nessuno —</option>'+columns.map(c=>`<option value="${c}">${c}</option>`).join('');
   document.querySelectorAll('.filter-item select:first-child').forEach(sel=>{
-    const cur=sel.value;sel.innerHTML=columns.map(c=>`<option value="${c}"${c===cur?' selected':''}>${c}</option>`).join('');
+    const cur=sel.value;
+    sel.innerHTML=columns.map(c=>`<option value="${c}"${c===cur?' selected':''}>${c}</option>`).join('');
   });
 }
 function showLoading(){document.getElementById('results-area').innerHTML=`<div class="loader"><div class="spin"></div>Caricamento...</div>`;}
